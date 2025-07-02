@@ -1,61 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel v12 Project
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+  </a>
 </p>
 
-## About Laravel
+<p align="center">
+  <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+  <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+  <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+  <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalasi Aplikasi Laravel v12
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Aplikasi ini menggunakan Laravel versi 12 dan membutuhkan PHP dengan versi yang kompatibel dengan Laravel 12.
 
-## Learning Laravel
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi ini secara lokal:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Clone atau Download Project
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Clone repository ini menggunakan Git:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+git clone https://github.com/Baype/competency_test_sipatex.git
+```
+atau download file ZIP lalu ekstrak ke folder yang diinginkan.
 
-## Laravel Sponsors
+### 2. Masuk ke Direktori Project
+Buka terminal dan masuk ke folder project:
+```
+cd nama-folder-project
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Konfigurasi File .env
+Salin file .env.example menjadi .env (jika belum ada file .env).
+```
+cp .env.example .env
+```
+Karena database yang digunakan adalah MySQL, pastikan konfigurasi database di file .env sudah diubah sesuai:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=user_mysql_anda
+DB_PASSWORD=password_mysql_anda
+```
+Jika sebelumnya menggunakan sqlite, pastikan bagian tersebut dinonaktifkan (comment out) dan gunakan konfigurasi mysql seperti di atas.
 
-### Premium Partners
+### 4. Membuat Database MySQL
+Buat database MySQL baru dengan nama yang sesuai dengan DB_DATABASE di file .env. Contoh menggunakan command line:
+```
+mysql -u root -p
+CREATE DATABASE nama_database;
+EXIT;
+```
+### 5. Install Dependencies
+Pastikan Anda sudah menginstall Composer dan Node.js / npm.
+Install dependencies PHP:
+```
+composer install
+```
+Install dependencies frontend (TailwindCSS dan Vite):
+```
+npm install
+```
+### 6. Migrasi Database
+Jalankan migrasi untuk membuat tabel-tabel database:
+```
+php artisan migrate
+```
+### 7. Seed Database
+Isi database dengan data contoh untuk memudahkan pengisian data racikan obat:
+```
+php artisan db:seed --class=DatabaseSeeder
+```
+Seeder ini akan mengisi tabel user, pasien, obat, dan signa.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 8. Jalankan Development Server
+Untuk menjalankan backend Laravel dan frontend TailwindCSS secara bersamaan, jalankan perintah berikut:
+```
+npm run dev
+```
+Cukup menggunakan command diatas, maka server laravel dan tailwindcss akan berjalan secara bersama karena sudah digunakan library concurrently.
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Atau bisa dijalankan terpisah menggunakan command
+```
+php artisan serve
+```
+### 9. Akses Aplikasi
+Buka browser dan akses URL berikut:
+```
+http://localhost:8000
+```
+Aplikasi Laravel v12 untuk pengelolaan obat sudah siap digunakan.
