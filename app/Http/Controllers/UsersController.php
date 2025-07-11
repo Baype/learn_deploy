@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -30,15 +31,24 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'required|string|max:255'
-        ]);
+      $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:6',
+    ]);
 
-        User::create($request->all());
-        return redirect()->route('register')->with('success-daftar', 'Account Already Registered!');
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+    ]);
 
+    // Kirim email verifikasi
+    event(new Registered($user));
+
+    auth()->login($user);
+
+    return redirect()->route('verification.notice');
     }
 
     /**
